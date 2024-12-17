@@ -42,6 +42,10 @@ namespace gdaddons {
                 return false;
             }
 
+            setMouseEnabled(true);
+            setKeyboardEnabled(true);
+            setKeypadEnabled(true);
+
             auto winSize = CCDirector::sharedDirector()->getWinSize();
 
             auto fadeBG = CCLayerColor::create(ccc4(0, 0, 0, 150));
@@ -74,7 +78,7 @@ namespace gdaddons {
                 this,
                 menu_selector(Popup::onClose)
             );
-            closeBtn->setPosition({ 0, this->getContentHeight() });
+            closeBtn->setPosition({ 0, contents->getContentHeight() });
             contents->addChild(closeBtn);
 
             return true;
