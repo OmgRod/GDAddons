@@ -75,6 +75,7 @@ namespace gdaddons {
                 menu_selector(Popup::onClose)
             );
             closeBtn->setPosition({ 0, this->getContentHeight() });
+            contents->addChild(closeBtn);
 
             return true;
         }
