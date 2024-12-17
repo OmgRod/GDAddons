@@ -77,6 +77,7 @@ namespace gdaddons {
             auto menu = CCMenu::create();
             menu->setContentSize({ 0, 0});
             menu->setPosition({ 0, 0 });
+            menu->setID("menu");
 
             auto closeBtnImage = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
             auto closeBtn = CCMenuItemSpriteExtra::create(
