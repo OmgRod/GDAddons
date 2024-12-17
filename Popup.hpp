@@ -1,6 +1,7 @@
 #ifndef POPUP_HPP
 #define POPUP_HPP
 
+#include "Geode/binding/CCMenuItemSpriteExtra.hpp"
 #include <Geode/Geode.hpp>
 
 using namespace geode::prelude;
@@ -67,7 +68,19 @@ namespace gdaddons {
             titleLabel->setPosition(ccp(width / 2, height - 10));
             contents->addChild(titleLabel);
 
+            auto closeBtnImage = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
+            auto closeBtn = CCMenuItemSpriteExtra::create(
+                closeBtnImage,
+                this,
+                menu_selector(Popup::onClose)
+            );
+            closeBtn->setPosition({ 0, this->getContentHeight() });
+
             return true;
+        }
+
+        void onClose(CCObject*) {
+            this->removeFromParent();
         }
     };
 }
