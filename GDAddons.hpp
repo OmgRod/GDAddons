@@ -2,9 +2,11 @@
 #define GDADDONS_HPP
 
 #include "Popup.hpp"
+#include "SwipableButton.hpp"
 
 namespace gdaddons {
-    using Popup = gdaddons::Popup; // Bring Popup into GDAddons namespace
+    using Popup = gdaddons::Popup;
+    using SwipableButton = gdaddons::SwipableButton;
 }
 
 #endif // GDADDONS_HPP
