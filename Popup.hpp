@@ -42,19 +42,18 @@ namespace gdaddons {
                 return false;
             }
 
-            setMouseEnabled(true);
-            setKeyboardEnabled(true);
-            setKeypadEnabled(true);
-
-            this::setTouchPriority(10);
+            // Set the touch priority for the popup itself
+            setTouchPriority(10);
 
             auto winSize = CCDirector::sharedDirector()->getWinSize();
 
+            // Create a background layer
             auto fadeBG = CCLayerColor::create(ccc4(0, 0, 0, 150));
             fadeBG->setContentSize(winSize);
             fadeBG->setPosition({0, 0});
             this->addChild(fadeBG, 0);
 
+            // Create the contents layer for the popup
             auto contents = CCLayer::create();
             contents->setContentSize({width, height});
             contents->setAnchorPoint(ccp(0.5f, 0.5f));
@@ -63,25 +62,35 @@ namespace gdaddons {
             contents->ignoreAnchorPointForPosition(false);
             this->addChild(contents, 1);
 
+            // Create the popup background
             auto bg = CCScale9Sprite::create("GJ_square01.png");
             bg->setContentSize({width, height});
             bg->setAnchorPoint(ccp(0.5f, 0.5f));
             bg->setPosition(ccp(width / 2, height / 2));
             contents->addChild(bg);
 
+            // Title label
             auto titleLabel = CCLabelBMFont::create(title.c_str(), "bigFont.fnt");
             titleLabel->setAnchorPoint(ccp(0.5f, 1.0f));
             titleLabel->setPosition(ccp(width / 2, height - 10));
             contents->addChild(titleLabel);
 
+            // Create the close button image and action
             auto closeBtnImage = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
             auto closeBtn = CCMenuItemSpriteExtra::create(
                 closeBtnImage,
                 this,
                 menu_selector(Popup::onClose)
             );
-            closeBtn->setPosition({ 0, contents->getContentHeight() });
-            contents->addChild(closeBtn);
+            closeBtn->setPosition({width - 20, height - 20});  // Adjust position as needed
+
+            // Create a menu and add the close button to it
+            auto menu = CCMenu::createWithItem(closeBtn);
+            menu->setPosition(CCPointZero);  // This ensures the menu itself has no offset
+            contents->addChild(menu);
+
+            // Set the touch priority for the close button menu
+            menu->setHandlerPriority(-128); // This is the priority used by CCMenu (adjust as needed)
 
             return true;
         }
