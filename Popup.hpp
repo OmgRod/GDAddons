@@ -46,6 +46,8 @@ namespace gdaddons {
             setKeyboardEnabled(true);
             setKeypadEnabled(true);
 
+            this::setTouchPriority(10);
+
             auto winSize = CCDirector::sharedDirector()->getWinSize();
 
             auto fadeBG = CCLayerColor::create(ccc4(0, 0, 0, 150));
